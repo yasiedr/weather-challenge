@@ -12,19 +12,19 @@ var apiKey = "fe626d3d1686e135361d033d1a310b52"
 
     var city = $(".searchInput").val();
    
-     //$(`.searchInput`).on(`submit`, function(event){
-   //event.preventDefault()
+     $(`.searchInput`).on(`submit`, function(event){
+   event.preventDefault()
 //     
    })
-    
+   var currentweatherurl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&Appid=" + apiKey ;
     getweather(city)
-    function getweather(city) {
-        var weatherinputurl `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    //function getweather(city) {
+      //  var weatherinputurl `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
         $.ajax({
-            url: weatherinputurl,
+            url: currentweatherurl,
             method: `GET`
-        }).then(function(weatherData){
-            console.log(weatherData)
+        }).then(function(getdata){
+            console.log(getdata)
 
     }
 
@@ -34,15 +34,25 @@ var apiKey = "fe626d3d1686e135361d033d1a310b52"
     
 
         //current weather append
-        var cardlist = $(".cardlist").append("<div>").addClass("card-body");
-        cardlist.empty();
-        var currentcitycard = cardlist.append("<p>");
+        var infolist = $(".infolist").append("<div>").addClass("card-body");
+        infolist.empty();
+        var currentcitycard = infolist.append("<p>");
         
-        cardlist.append(currentcitycard);
+        infolist.append(currentcitycard);
 
         // Adjust Date 
         var timeUTC = new Date(response.dt * 1000);
         currentcitycard.append(response.name + " " + timeUTC.toLocaleDateString("en-US"));
+        var currentresult = currentcitycard.append("");
+          
+            currentcitycard.append(currentresult);
+            
+            currentresult.append("Temperature: " + getdata.main.temp + "</br>");
+            
+            //wind speed
+            currentresult.append("Wind Speed: " + getdata.wind.speed + "</br>");
+            // Add Humidity
+            currentresult.append("" + "Humidity: " + getdata.main.humidity + "%" + "");
 
         
   

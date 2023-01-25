@@ -30,3 +30,59 @@ img {
     padding: 10px;
 
 }
+.fiveDaybox {
+    padding: 20px;
+    background-color: #1E90FF;
+    color: white;
+    float: left;
+    margin: 10px;
+    border: 1px solid rgb(236, 167, 241);
+
+
+}
+.fiveDaybox {
+    padding: 20px;
+    background-color: #1E90FF;
+    color: white;
+    float: left;
+    margin: 10px;
+    border: 1px solid rgb(236, 167, 241);
+
+
+}
+.card-body{
+    color: rgb(69, 221, 178)
+  forestgreen firebrick;
+  font-size: size 50px; 
+}
+h1 {
+  margin-bottom: 0%;
+ background-image: linear-gradient(to right, rgb(255, 193, 8), rgb(78, 236, 125) , rgb(0, 123, 255));
+  }
+
+div {
+    margin: 15px;
+    border: 2px;
+}
+h3 {
+    color:yellowgreen;
+    padding: 30px;
+    margin-right: auto;
+}
+h5 {
+    color:yellowgreen;
+    padding-top: 30px;
+}
+.infolist{
+    display:flex ;
+    justify-content: center;
+}
+.row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  
+  .row :first-child {
+      align-self: center;
+  }
