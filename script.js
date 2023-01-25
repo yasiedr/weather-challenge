@@ -2,8 +2,8 @@ var searchButton = $(".searchButton");
 
 var apiKey = "fe626d3d1686e135361d033d1a310b52"
 
-var currentweather = document.getElementById('currentweather')
-var futureweather = document.getElementById('5dayforcast')
+//var currentweather = document.getElementById('currentweather')
+//var futureweather = document.getElementById('5dayforcast')
 
 
 
@@ -12,17 +12,25 @@ var futureweather = document.getElementById('5dayforcast')
 
     var city = $(".searchInput").val();
    
-     $(`.searchInput`).on(`submit`, function(event){
-   event.preventDefault()
+     //$(`.searchInput`).on(`submit`, function(event){
+   //event.preventDefault()
 //     
    })
-    })
-    function weatherinputurl(city) {
-        return `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    
+    getweather(city)
+    function getweather(city) {
+        var weatherinputurl `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+        $.ajax({
+            url: weatherinputurl,
+            method: `GET`
+        }).then(function(weatherData){
+            console.log(weatherData)
+
     }
 
-    
-    
+        );
+    var savedcities = document.getElementById('city').value;
+    localStorage.setItem('city', savedcities);
     
 
         //current weather append
@@ -35,4 +43,8 @@ var futureweather = document.getElementById('5dayforcast')
         // Adjust Date 
         var timeUTC = new Date(response.dt * 1000);
         currentcitycard.append(response.name + " " + timeUTC.toLocaleDateString("en-US"));
-    
+
+        
+  
+          
+            
