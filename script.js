@@ -16,46 +16,37 @@ var apiKey = "fe626d3d1686e135361d033d1a310b52"
    event.preventDefault()
 //     
    })
+
+
    var currentweatherurl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&Appid=" + apiKey ;
-    // getweather(city)
-    //function getweather(city) {
-      //  var weatherinputurl `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-        $.ajax({
+
+
+         $.ajax({
             url: currentweatherurl,
-            method: `GET`
-        }).then(function(getdata){
-            console.log(getdata)
-
-    
-
-        ;
-    var savedcities = document.getElementById('city').value;
-    localStorage.setItem('city', savedcities);
-    
-
-        //current weather append
-        var infolist = $(".infolist").append("<div>").addClass("card-body");
-        infolist.empty();
-        var currentcitycard = infolist.append("<p>");
-        
-        infolist.append(currentcitycard);
-
-        // Adjust Date 
-        var timeUTC = new Date(response.dt * 1000);
-        currentcitycard.append(response.name + " " + timeUTC.toLocaleDateString("en-US"));
-        var currentresult = currentcitycard.append("");
-          
-            currentcitycard.append(currentresult);
-            
-            currentresult.append("Temperature: " + getdata.main.temp + "</br>");
-            
-            //wind speed
-            currentresult.append("Wind Speed: " + getdata.wind.speed + "</br>");
-            // Add Humidity
-            currentresult.append("" + "Humidity: " + getdata.main.humidity + "%" + "");
-        })
+            method:"GET"
+         }).then(function(getdata){
 
 
+
+             var infolist = $(".infolist").append("<div>").addClass("card-body");
+             
+             var currentcitycard = infolist.append("<p>");
+             infolist.append(currentcitycard);
+
+             var timeUTC = new Date(getdata.dt * 1000);
+             currentcitycard.append(getdata.name + " " + timeUTC.toLocaleDateString("en-US"));
+             currentcitycard.append(`<img src="https://openweathermap.org/img/wn/${getdata.weather[0].icon}@2x.png">`);
+
+             var currentresult = currentcitycard.append("");
+
+             currentcitycard.append(currentresult);
+
+             currentresult.append("Temperature: " + (getdata.main.temp -273) + "c" + "<br>")
+             currentresult.append("Humidity: " + getdata.main.humidity +"%" + "<br>" )
+             currentresult.append("windspeed: " + getdata.wind.speed + "")
+
+         })
+   
           
     // var input = document.querySelector('.input_text');
     // var main = document.querySelector('#name');
@@ -99,7 +90,7 @@ var apiKey = "fe626d3d1686e135361d033d1a310b52"
             var FiveDayTimeUTC1 = new Date(response.list[i].dt * 1000);
             FiveDayTimeUTC1 = FiveDayTimeUTC1.toLocaleDateString("en-US");
 
-            fiveDayDiv.append("<div class=fiveDaybox>" + "<p>" + FiveDayTimeUTC1 + "</p>" + `<img src="https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png">` + "<p>" + "Temperature: " + response.list[i].main.temp + "</p>" + "<p>" + "Humidity: " + response.list[i].main.humidity + "%" + "</p>" + "</div>");
+            fiveDayDiv.append("<div class=fiveDaybox>" + "<p>" + FiveDayTimeUTC1 + "</p>" + `<img src="https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png">` + "<p>" + "Temperature: " + (response.list[i].main.temp -273) + "</p>" + "<p>" + "Humidity: " + response.list[i].main.humidity + "%" + "</p>" + "</div>");
 
 
         })
@@ -113,12 +104,14 @@ var apiKey = "fe626d3d1686e135361d033d1a310b52"
 refreshButtonEl.on('click', function () {
 location.reload();
 });
-let pastCities =[]
+
 
 
 
 
 // Store searched cities in local storage
+var savedcities = document.getElementById('city').value;
+    localStorage.setItem('city', savedcities);
 function storeCities() {
 localStorage.setItem('city', JSON.stringify(preities));
 }
